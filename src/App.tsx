@@ -68,7 +68,7 @@ export default function App() {
               <span className="text-xs md:text-sm font-bold tracking-[0.2em] text-brand-secondary uppercase">Estrategia de Crecimiento Avanzada 2026</span>
             </div>
             
-            <h1 className="editorial-heading text-5xl md:text-7xl lg:text-8xl mb-8 leading-[1] tracking-tighter">
+            <h1 className="editorial-heading text-4xl md:text-5xl lg:text-6xl mb-8 leading-[1] tracking-tighter">
               IDEAS Y CONSEJOS <br />
               <span className="text-brand-accent italic">DE TRÁFICO WEB</span>
             </h1>
