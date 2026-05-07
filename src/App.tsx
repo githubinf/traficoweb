@@ -73,11 +73,11 @@ export default function App() {
               <span className="text-brand-accent italic">DE TRÁFICO WEB</span>
             </h1>
             
-            <p className="text-2xl md:text-3xl lg:text-4xl text-slate-600 mb-8 font-medium leading-tight">
+            <p className="text-xl md:text-2xl lg:text-3xl text-slate-600 mb-8 font-medium leading-tight">
               Existen otras formas de generar tráfico para tu web además de los buscadores que puedes aplicar inmediatamente.
             </p>
             
-            <p className="text-xl md:text-2xl text-slate-500 mb-10 font-light max-w-2xl">
+            <p className="text-lg md:text-xl text-slate-500 mb-10 font-light max-w-2xl">
               DEJA DE PERSEGUIR ALGORITMOS: El Plan de 90 Días para Construir un Sistema Sostenible
             </p>
 
