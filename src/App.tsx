@@ -56,7 +56,7 @@ export default function App() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="pt-16 pb-24 px-6 bg-brand-paper overflow-hidden">
+      <section className="pt-8 pb-24 px-6 bg-brand-paper overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
