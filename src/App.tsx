@@ -55,44 +55,63 @@ export default function App() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-16 pb-24 px-6 bg-brand-paper overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            className="md:w-3/5 text-center md:text-left"
           >
-            <div className="inline-block px-6 py-2 bg-brand-accent/10 border border-brand-accent/30 mb-4 rounded-full">
+            <div className="inline-block px-6 py-2 bg-brand-accent/10 border border-brand-accent/30 mb-8 rounded-full">
               <span className="text-xs md:text-sm font-bold tracking-[0.2em] text-brand-secondary uppercase">Estrategia de Crecimiento Avanzada 2026</span>
             </div>
             
-            <h1 className="editorial-heading text-6xl md:text-8xl lg:text-[7.5rem] mb-6 leading-[0.9] tracking-tighter">
+            <h1 className="editorial-heading text-5xl md:text-7xl lg:text-8xl mb-8 leading-[1] tracking-tighter">
               IDEAS Y CONSEJOS <br />
-              <span className="text-brand-accent">DE TRÁFICO WEB</span>
+              <span className="text-brand-accent italic">DE TRÁFICO WEB</span>
             </h1>
             
-            <p className="text-2xl md:text-3xl lg:text-4xl text-slate-600 mb-6 font-medium leading-tight">
+            <p className="text-2xl md:text-3xl lg:text-4xl text-slate-600 mb-8 font-medium leading-tight">
               Existen otras formas de generar tráfico para tu web además de los buscadores que puedes aplicar inmediatamente.
             </p>
             
-            <p className="text-xl md:text-2xl text-slate-500 mb-8 font-light">
+            <p className="text-xl md:text-2xl text-slate-500 mb-10 font-light max-w-2xl">
               DEJA DE PERSEGUIR ALGORITMOS: El Plan de 90 Días para Construir un Sistema Sostenible
             </p>
 
-            <p className="text-xl md:text-3xl text-slate-700 leading-relaxed mb-8 font-light max-w-3xl mx-auto">
-              Descubre por qué el SEO tradicional ya no es suficiente, cómo la Inteligencia Artificial ha cambiado las reglas del juego y el método paso a paso para atraer visitantes calificados desde 6 canales diferentes... todo explicado para principiantes, sin tecnicismos ni promesas falsas.
-            </p>
-
-            <div className="flex flex-col items-center space-y-5">
+            <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
               <CTAButton text="QUIERO MI COPIA AHORA" />
-              <div className="flex flex-col items-center space-y-1">
+              <div className="flex flex-col items-center md:items-start">
                 <button 
                   onClick={() => scrollToSection("oferta")}
-                  className="text-lg md:text-xl text-brand-primary font-bold tracking-tight uppercase underline decoration-brand-accent decoration-2 underline-offset-8 transition-opacity hover:opacity-70"
+                  className="text-lg font-bold tracking-tight uppercase underline decoration-brand-accent decoration-2 underline-offset-8 transition-opacity hover:opacity-70 text-brand-primary"
                 >
-                  Inversión única de $9,99
+                  Inversión: $9,99
                 </button>
-                <p className="text-sm text-slate-400 font-medium tracking-widest uppercase italic">Acceso instantáneo • Manual PDF Digital</p>
+                <p className="text-xs text-slate-400 font-medium tracking-widest uppercase italic mt-2">Acceso Instantáneo • PDF</p>
               </div>
+            </div>
+
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-light max-w-2xl italic border-l-4 border-brand-accent/30 pl-6">
+              Descubre por qué el SEO tradicional ya no es suficiente y el método paso a paso para atraer visitantes calificados desde 6 canales diferentes... sin tecnicismos ni promesas falsas.
+            </p>
+          </motion.div>
+
+          {/* Book Cover Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="md:w-2/5 flex justify-center"
+          >
+            <div className="relative group">
+              <div className="absolute inset-0 bg-brand-accent/20 translate-x-4 translate-y-4 -z-10 blur-2xl group-hover:translate-x-6 group-hover:translate-y-6 transition-transform duration-700" />
+              <img 
+                src="https://i.ibb.co/r26jfDh4/ideas-y-consejos-de-trafico-web.png" 
+                alt="Portada Libro: Ideas y Consejos de Tráfico Web" 
+                className="w-full max-w-[320px] md:max-w-sm h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] group-hover:rotate-1 transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
             </div>
           </motion.div>
         </div>
