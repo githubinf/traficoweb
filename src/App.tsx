@@ -20,6 +20,8 @@ const CTAButton = ({ text = "ADQUIRIR ACCESO INMEDIATO", isFinal = false }: { te
     return (
       <motion.a
         href={MAIN_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
         whileHover={{ y: -4, scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className="btn-cta"
@@ -380,6 +382,7 @@ export default function App() {
                   alt="Francisco González" 
                   className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-xl"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
              </motion.div>
           </div>
@@ -439,7 +442,7 @@ export default function App() {
       <section className="py-16 px-6 bg-brand-primary text-white text-center">
         <div className="max-w-3xl mx-auto space-y-6">
           <ShieldCheck className="w-16 h-16 text-brand-accent mx-auto mb-4" />
-          <h2 className="editorial-heading !text-white text-5xl md:text-7xl italic leading-tight">30 Días de Garantía Absoluta. <br />Sin Riesgo. Sin Excusas.</h2>
+          <h2 className="editorial-heading !text-white text-2xl md:text-4xl italic leading-tight">30 Días de Garantía Absoluta. <br />Sin Riesgo. Sin Excusas.</h2>
           
           <div className="text-xl text-slate-300 font-light leading-relaxed space-y-4">
             <p>
