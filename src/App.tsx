@@ -1,502 +1,577 @@
+import { motion } from "motion/react";
+import { ArrowDown, ArrowRight, Check, ShieldCheck, Star } from "lucide-react";
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+const MAIN_LINK = "https://fcofrancis.pay.clickbank.net/?cbitems=15";
 
-const CTA_TOP = () => (
-  <motion.button
-    whileHover={{ scale: 1.02 }}
-    whileTap={{ scale: 0.98 }}
-    className="bg-brand-accent hover:bg-amber-600 text-white font-bold py-5 px-10 rounded-full shadow-xl transition-all text-xl uppercase tracking-wider"
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+const CTAButton = ({ text = "ADQUIRIR ACCESO INMEDIATO", isFinal = false }: { text?: string; isFinal?: boolean }) => {
+  if (isFinal) {
+    return (
+      <motion.a
+        href={MAIN_LINK}
+        whileHover={{ y: -4, scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="btn-cta"
+      >
+        {text}
+      </motion.a>
+    );
+  }
+
+  return (
+    <motion.button
+      onClick={() => scrollToSection("oferta")}
+      whileHover={{ y: -4, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="btn-cta"
+    >
+      {text}
+    </motion.button>
+  );
+};
+
+const AnchorButton = ({ text, target }: { text: string; target: string }) => (
+  <button
+    onClick={() => scrollToSection(target)}
+    className="btn-anchor"
   >
-    Acceso Inmediato Por Solo $9,99
-  </motion.button>
-);
-
-const Section = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <section className={`py-24 px-6 md:px-12 max-w-4xl mx-auto ${className}`}>
-    {children}
-  </section>
+    {text} <ArrowDown className="ml-2 w-4 h-4" />
+  </button>
 );
 
 export default function App() {
-  const [readingTime, setReadingTime] = useState(0);
-
-  useEffect(() => {
-    // Just a fun little detail for a long page
-    const text = document.body.innerText;
-    const words = text.split(/\s+/).length;
-    setReadingTime(Math.ceil(words / 200));
-  }, []);
-
   return (
     <div className="min-h-screen">
-      {/* ProgressBar (Subtle) */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-brand-red z-50 origin-left"
-        style={{ scaleX: 0 }} // This would normally be handled by useScroll, but let's keep it simple
-      />
+      {/* Hero Section */}
+      <section className="pt-16 pb-24 px-6 bg-brand-paper overflow-hidden">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-block px-6 py-2 bg-brand-accent/10 border border-brand-accent/30 mb-4 rounded-full">
+              <span className="text-xs md:text-sm font-bold tracking-[0.2em] text-brand-secondary uppercase">Estrategia de Crecimiento Avanzada 2026</span>
+            </div>
+            
+            <h1 className="editorial-heading text-6xl md:text-8xl lg:text-[7.5rem] mb-6 leading-[0.9] tracking-tighter">
+              IDEAS Y CONSEJOS <br />
+              <span className="text-brand-accent">DE TRÁFICO WEB</span>
+            </h1>
+            
+            <p className="text-2xl md:text-3xl lg:text-4xl text-slate-600 mb-6 font-medium leading-tight">
+              Existen otras formas de generar tráfico para tu web además de los buscadores que puedes aplicar inmediatamente.
+            </p>
+            
+            <p className="text-xl md:text-2xl text-slate-500 mb-8 font-light">
+              DEJA DE PERSEGUIR ALGORITMOS: El Plan de 90 Días para Construir un Sistema Sostenible
+            </p>
 
-      {/* Header / Intro */}
-      <header className="bg-brand-blue text-slate-900 py-32 px-6 text-center border-b-8 border-brand-red">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-5xl mx-auto"
-        >
-          <span className="uppercase tracking-[0.3em] text-brand-red font-bold mb-6 block text-sm">
-            Estrategia Avanzada de Tráfico Web
-          </span>
-          <h1 className="editorial-heading text-5xl md:text-7xl mb-8 text-balance">
-            DEJA DE PERSEGUIR ALGORITMOS:
-          </h1>
-          <p className="editorial-heading text-2xl md:text-3xl text-slate-800 italic font-normal max-w-3xl mx-auto leading-relaxed">
-            El Plan de 90 Días para Construir un Sistema de Tráfico Sostenible (Aunque Hoy Tengas 0 Visitas)
-          </p>
-          <div className="mt-12 h-1 w-24 bg-brand-red mx-auto"></div>
-          <p className="mt-12 text-xl md:text-2xl text-slate-700 font-light max-w-4xl mx-auto leading-relaxed text-balance">
-            Descubre por qué el SEO tradicional ya no es suficiente, cómo la IA ha cambiado las reglas del juego y el método paso a paso para atraer visitantes calificados desde 6 canales diferentes... todo explicado para principiantes, sin tecnicismos ni promesas falsas.
-          </p>
-          <div className="mt-16">
-            <CTA_TOP />
-          </div>
-        </motion.div>
-      </header>
+            <p className="text-xl md:text-3xl text-slate-700 leading-relaxed mb-8 font-light max-w-3xl mx-auto">
+              Descubre por qué el SEO tradicional ya no es suficiente, cómo la Inteligencia Artificial ha cambiado las reglas del juego y el método paso a paso para atraer visitantes calificados desde 6 canales diferentes... todo explicado para principiantes, sin tecnicismos ni promesas falsas.
+            </p>
 
-      {/* The Problem / Diagnosis */}
-      <Section className="markdown-body">
-        <h2 className="text-center italic">¿Sientes que estás perdiendo el tiempo?</h2>
-        <p className="text-2xl font-serif text-brand-blue mb-12 text-center text-balance leading-snug">
-          Permíteme adivinar: Tienes un blog, una tienda online o un proyecto digital con mucho potencial... pero el contador de visitas parece haberse congelado en el tiempo.
-        </p>
-
-        <p>
-          Has intentado con todas tus fuerzas "hacer SEO", siguiendo cada tutorial gratuito que encuentras en YouTube. Pero entre las actualizaciones core de Google que parecen odiar tu contenido, la invasión de la Inteligencia Artificial y los cambios constantes en las políticas de privacidad, te sientes navegando en una tormenta sin brújula.
-        </p>
-
-        <p>
-          Publicas en redes sociales con la esperanza de que "algo viralice". Pasas horas editando, diseñando carruseles, buscando los hashtags perfectos... pero cuando le das a publicar, el silencio te devuelve el eco. Un par de 'likes' de tus amigos y nada más.
-        </p>
-
-        <p>
-          Empiezas a creer que el problema eres tú. Que simplemente no tienes ese "toque mágico" que otros parecen poseer. Que quizás el marketing digital es una ciencia oculta reservada para genios matemáticos o personas con presupuestos infinitos.
-        </p>
-
-        <div className="my-16 p-8 border-l-4 border-brand-red bg-slate-50 italic text-xl">
-          "Déjame decirte algo con honestidad brutal: El problema no eres tú. El problema es que te han vendido un mapa de una ciudad que ya no existe."
+            <div className="flex flex-col items-center space-y-5">
+              <CTAButton text="QUIERO MI COPIA AHORA" />
+              <div className="flex flex-col items-center space-y-1">
+                <button 
+                  onClick={() => scrollToSection("oferta")}
+                  className="text-lg md:text-xl text-brand-primary font-bold tracking-tight uppercase underline decoration-brand-accent decoration-2 underline-offset-8 transition-opacity hover:opacity-70"
+                >
+                  Inversión única de $9,99
+                </button>
+                <p className="text-sm text-slate-400 font-medium tracking-widest uppercase italic">Acceso instantáneo • Manual PDF Digital</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
+      </section>
 
-        <p>
-          Los "especialistas" que conoces siguen enseñando tácticas que funcionaban en 2019. Siguen repitiendo como mantras que "el contenido es el rey" sin explicarte que la realeza ha sido destronada por el contexto y la intención. Siguen obsesionados con palabras clave de volumen alto mientras el mundo ya está conversando de forma natural con asistentes de voz y modelos de lenguaje a gran escala.
-        </p>
+      {/* The Diagnosis Section */}
+      <section className="py-16 px-6 bg-brand-paper border-t border-slate-100">
+        <div className="max-w-4xl mx-auto prose-editorial">
+          <SectionTag text="EL DIAGNÓSTICO" />
+          <h2>¿Sientes Que Estás Perdiendo el Tiempo?</h2>
+          
+          <p>
+            Permíteme adivinar: Tienes un blog, una tienda online o un proyecto digital con mucho potencial... pero nadie lo visita. La realidad del contador de visitas es una bofetada diaria que te recuerda que, a pesar de tu esfuerzo, algo no termina de encajar.
+          </p>
 
-        <p>
-          Y tú te quedas atrás. No por falta de talento, ni por falta de esfuerzo. Te quedas atrás por falta de un sistema adaptado a la realidad de hoy, no a la de hace cinco años.
-        </p>
-      </Section>
+          <p>
+            Has intentado con todas tus fuerzas "hacer SEO", pero entre las actualizaciones core de Google, la irrupción masiva de la IA y los cambios constantes en las políticas de privacidad, te sientes profundamente perdido. Sientes que el suelo que pisas se mueve cada vez que crees haber encontrado estabilidad.
+          </p>
+
+          <p>
+            Publicas en redes sociales con la esperanza ciega de que "algo viralice"... pero el silencio absoluto te devuelve el eco. Un par de me gusta de cortesía es todo lo que obtienes a cambio de horas de trabajo creativo.
+          </p>
+
+          <p className="bg-slate-50 p-6 rounded-sm border-l-4 border-brand-accent italic text-2xl leading-relaxed text-brand-primary">
+            "Déjame decirte algo con honestidad brutal: El problema no eres tú. El problema es que te han vendido un mapa de una ciudad que ya no existe."
+          </p>
+
+          <p>
+            Los supuestos expertos que conoces siguen enseñando los mismos principios de posicionamiento orgánico de 2019. Siguen repitiendo como un mantra que "el contenido es el rey" sin explicarte que la realeza ha cambiado de manos. Siguen hablando de palabras clave cuando el mundo ya está conversando de forma natural con asistentes generativos.
+          </p>
+
+          <p>
+            Y tú, mientras tanto, te quedas atrás. No por falta de talento, ni por falta de dedicación. Te quedas atrás simplemente por falta de información actualizada y contextualizada a la era de la IA.
+          </p>
+        </div>
+      </section>
 
       {/* The New Reality */}
-      <Section className="bg-slate-50 rounded-3xl markdown-body my-12 border border-slate-200">
-        <h2 className="text-center">El Tráfico ha Muerto. Larga Vida al Tráfico.</h2>
-        <p>
-          Déjame contarte una historia real, de esas que no solemos ver en los titulares de marketing pero que ocurren todos los días en el anonimato de la red.
-        </p>
-        <p>
-          Hace apenas dos años, un blog dedicado a la cocina saludable y recetas de temporada disfrutaba de una salud envidiable: 100,000 visitas mensuales. Su propietario lo había logrado con años de trabajo duro, optimizando cada receta para las búsquedas más populares de Google. Era su orgullo, su proyecto de vida y su principal fuente de ingresos.
-        </p>
-        <p>
-          De repente, en un lapso de apenas seis meses, perdió el 70% de su tráfico mensual.
-        </p>
-        <p>
-          ¿Qué hizo mal? Absolutamente nada. No intentó engañar al buscador, no compró enlaces sospechosos, no bajó la calidad de su contenido. Simplemente... el mundo cambió a su alrededor y él no se dio cuenta hasta que fue demasiado tarde.
-        </p>
-        <p>
-          Su audiencia ya no buscaba "ensaladas fáciles" en la barra de búsqueda de Google. Ahora esa misma audiencia pasaba horas en TikTok viendo a creadores preparar una ensalada en 30 segundos con música rítmica. Otros buscaban inspiración visual en Pinterest mientras planificaban su semana. Y los más tecnológicos simplemente le preguntaban a ChatGPT: "¿qué puedo cenar hoy con un calabacín y media cebolla que me sobran en la nevera?".
-        </p>
-        <p>
-          El blog seguía siendo excelente. Sus recetas seguían funcionando. Pero el lugar donde se encontraba su audiencia había mutado. Ya no estaban allí esperándolo.
-        </p>
-        
-        <div className="bg-brand-blue text-white p-12 my-12 rounded-xl text-center">
-          <p className="text-4xl editorial-heading mb-4 text-brand-accent">
-            El 68% del tráfico web actual ya no proviene de los buscadores tradicionales.
+      <section className="py-16 px-6 bg-slate-50 border-y border-slate-100 overflow-hidden relative">
+        <div className="max-w-4xl mx-auto prose-editorial relative z-10">
+          <SectionTag text="LA NUEVA REALIDAD" />
+          <h2 className="editorial-heading text-4xl md:text-6xl mb-8">El Tráfico ha Muerto. <br />Larga Vida al Tráfico.</h2>
+          
+          <p>
+            Déjame contarte una historia real, de esas que no solemos inventar para rellenar páginas de manuales de marketing.
           </p>
-          <p className="text-lg opacity-90">
-            Sí, has leído bien. Más de dos tercios de tus visitantes potenciales están navegando en otros océanos.
+          
+          <p>
+            Hace apenas dos años, un blog de cocina saludable disfrutaba de una salud envidiable: 100.000 visitas mensuales. Lo había logrado con recetas impecablemente optimizadas para Google. Era su orgullo, su proyecto de vida y su principal fuente de ingresos.
           </p>
-        </div>
+ 
+          <p>
+            De repente, en un suspiro de seis meses, perdió el 70% de su tráfico mensual.
+          </p>
+ 
+          <p className="font-semibold text-brand-accent">
+            No hizo nada malo. No lo penalizaron por prácticas ilícitas. Simplemente... el mundo a su alrededor cambió.
+          </p>
+ 
+          <p>
+            Su audiencia ya no buscaba "ensaladas fáciles" en Google de la forma tradicional. Ahora esa misma gente pasaba horas en TikTok viendo a alguien preparar esa misma ensalada en 30 segundos con un ritmo vibrante. Buscaban inspiración visual rápida en Pinterest. O, lo que es aún más revelador, le preguntaban directamente a ChatGPT: "¿qué puedo cenar hoy con lo que tengo en la nevera?".
+          </p>
+ 
+          <p>
+            El blog seguía siendo excelente. Sus consejos seguían siendo válidos. Pero su audiencia ya no estaba allí esperándole.
+          </p>
+ 
+          <div className="my-12 flex flex-col items-center text-center p-12 bg-white border border-slate-200 shadow-sm">
+            <span className="text-brand-accent text-6xl md:text-8xl font-serif mb-4 leading-none">68%</span>
+            <p className="text-xl md:text-2xl text-brand-primary max-w-sm font-medium">
+              del tráfico web actual ya no proviene de los motores de búsqueda tradicionales.
+            </p>
+          </div>
+ 
+          <p>
+            Sí, has leído con total precisión. Más de dos tercios de tus visitantes potenciales están navegando en otros océanos: redes sociales dinámicas, comunidades cerradas, podcasts de nicho, asistentes de voz, boletines personales.
+          </p>
+ 
+          <p>
+            Si tu estrategia se limita al cansado mantra de "posicionar en Google", estás ignorando deliberadamente dos tercios de tus oportunidades reales de crecimiento.
+          </p>
 
-        <p>
-          Si tu estrategia se limita a "posicionar en Google", estás ignorando deliberadamente dos tercios de tus oportunidades de crecimiento. Estás jugando en una pequeña fracción del campo de juego total.
-        </p>
-        <p>
-          Este libro, <strong>"Ideas Y Consejos De Tráfico Web"</strong>, nace precisamente de esa constatación. No te dice que abandones el SEO; eso sería una locura. Te enseña a convertirlo en una pieza más de un engranaje mucho más ambicioso, inteligente y, sobre todo, humano.
-        </p>
-      </Section>
-
-      {/* Book Title Special Box */}
-      <section className="py-24 text-center bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm uppercase tracking-widest text-brand-red font-bold mb-4">Presentando el nuevo manual definitivo</p>
-          <h2 className="editorial-heading text-4xl md:text-6xl text-brand-blue mb-8 leading-tight">
-            Ideas Y Consejos De Tráfico Web:<br />
-            <span className="text-brand-red italic text-3xl md:text-4xl block mt-4">
-              Existen otras formas de generar tráfico para tu web además de los buscadores que puedes aplicar inmediatamente.
-            </span>
-          </h2>
-          <div className="w-16 h-1 bg-brand-accent mx-auto mb-12"></div>
+          <div className="mt-12 flex justify-center">
+            <CTAButton text="SÍ, QUIERO SALIR DEL SILENCIO DIGITAL" />
+          </div>
         </div>
       </section>
 
-      {/* Detailed Curriculum Section */}
-      <Section className="markdown-body">
-        <h2 className="text-center italic">¿Qué aprenderás? Un recorrido profundo por el sistema</h2>
-        <p>
-          Vamos a sumergirnos en el corazón de este manual. No quiero simplemente darte una lista de temas; quiero mostrarte cómo cada capítulo ha sido diseñado para transformar tu mentalidad y tu operativa diaria. Este no es un libro para leer y guardar en la estantería digital; es un mapa de acción.
-        </p>
-
-        <h3>PARTE 1: FUNDAMENTOS DEL TRÁFICO MODERNO</h3>
-        
-        <h4>Capítulo 1: El Nuevo Panorama del Tráfico Web</h4>
-        <p>
-          ¿Por qué es el primer capítulo? Porque no puedes aspirar a ganar un juego cuyas reglas han cambiado sin que te avisaran. En este capítulo realizamos una radiografía cruda del momento actual.
-        </p>
-        <ul>
-          <li><strong>La revolución de la IA y su impacto real:</strong> Analizamos cómo el 40% de los menores de 30 años ya usa modelos como ChatGPT o Gemini como su primera puerta de entrada a la información. Aprenderás qué significa esto para la estructura de tu contenido.</li>
-          <li><strong>El colapso del alcance orgánico tradicional:</strong> Los números no mienten. Donde antes un 32% de los usuarios hacían clic en los resultados de búsqueda, hoy esa cifra ha caído drásticamente al 18%. Entenderás por qué necesitas diversificar para no morir.</li>
-          <li><strong>El ascenso imparable del social commerce:</strong> TikTok, Instagram y Pinterest ya no son solo para "ver fotos". Son ecosistemas donde se descubre y se compra de forma impulsiva y nativa.</li>
-          <li><strong>Fragmentación de audiencias:</strong> Tus usuarios ya no están en un solo lugar. Navegan por una media de cinco plataformas distintas al día. Te enseñamos a estar donde ellos están en el momento justo.</li>
-          <li><strong>Los 4 Pilares del Tráfico Sostenible:</strong> Experiencia, valor, presencia y comunidad. La base de todo lo que vendrá después.</li>
-        </ul>
-        <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 mb-12">
-          <p className="font-bold text-brand-red mb-2">Ejercicio práctico incluido:</p>
-          <p className="text-sm italic">Una auditoría de tráfico en 3 pasos diseñada para diagnosticar tus fugas actuales de audiencia y priorizar tus próximos canales.</p>
-        </div>
-
-        <h4>Capítulo 2: Psicología del Usuario Moderno</h4>
-        <p>
-          Los algoritmos mutan cada semana, pero la naturaleza humana se mantiene estable durante décadas. En este capítulo aprenderás a pensar como tu usuario, no como un vendedor desesperado.
-        </p>
-        <ul>
-          <li><strong>Neurociencia del comportamiento digital:</strong> El ciclo de atención humana ha caído de los 12 segundos en 2020 a apenas 8 segundos hoy. Diseñaremos estrategias para capturar la atención en ese brevísimo parpadeo.</li>
-          <li><strong>La anatomía del scroll:</strong> El 73% de la gente nunca llega a leer la mitad de lo que escribes. Aprenderás la técnica de "interacción por pulgada" para inyectar valor constante en cada movimiento de dedo.</li>
-          <li><strong>Toma de decisiones en entornos saturados:</strong> El cerebro humano se bloquea ante el exceso de opciones. Te enseñamos a ser la opción obvia y sencilla.</li>
-          <li><strong>Confianza vs. Escepticismo:</strong> En la era de las noticias falsas y la saturación, la transparencia es tu mayor activo. Descubre cómo la vulnerabilidad estratégica puede ser más poderosa que cualquier anuncio.</li>
-          <li><strong>Los 6 sesgos cognitivos críticos:</strong> Desde el efecto de exposición hasta la aversión a la pérdida. Aplicados con ética absoluta para guiar, no para manipular.</li>
-        </ul>
-
-        <h3>PARTE 2: ESTRATEGIAS DE CONTENIDO ACTUALIZADAS</h3>
-        
-        <h4>Capítulo 3: Contenido que Convierte en la Era de la IA</h4>
-        <p>
-          La Inteligencia Artificial no va a quitarte el trabajo, pero una persona que sepa usarla mejor que tú, posiblemente sí. Este capítulo te enseña a colaborar con las máquinas para potenciar tu creatividad humana.
-        </p>
-        <ul>
-          <li><strong>El Marco ACTS:</strong> Autenticidad, Contexto, Transparencia y Sustancia. El antídoto infalible contra el contenido genérico e insípido que inunda la red.</li>
-          <li><strong>SEO Conversacional:</strong> Cómo estructurar lo que escribes para que los nuevos asistentes de IA te citen como su fuente de autoridad.</li>
-          <li><strong>Atomización 2.0:</strong> Convierte una sola gran idea en 12 formatos diferentes (video, carrusel, hilo, podcast...) sin perder la cordura en el intento.</li>
-          <li><strong>Flujos de trabajo híbridos:</strong> Dónde aporta valor la IA y dónde es absolutamente vital tu toque personal. Aprenderás a usar ChatGPT o Claude como amplificadores, no como sustitutos.</li>
-        </ul>
-
-        <h4>Capítulo 4: SEO Actual – Más Allá de las Palabras Clave</h4>
-        <p>
-          El SEO no ha muerto, pero el SEO de 2019 sí. En este capítulo redefinimos cómo posicionar tu voz en un mundo saturado de información.
-        </p>
-        <ul>
-          <li><strong>EEAT Extremo:</strong> Experiencia, Expertise, Autoridad y Confianza. Ya no basta con decir que sabes; tienes que demostrarlo con evidencias, datos y una cara visible.</li>
-          <li><strong>Topic Clusters vs. Keywords:</strong> Aprenderás por qué concentrarte en grupos de temas, y no en palabras aisladas, puede multiplicar tu autoridad de dominio.</li>
-          <li><strong>SEO Técnico con sentido humano:</strong> Core Web Vitals y velocidad de carga explicados no como requisitos técnicos, sino como una cuestión de respeto al tiempo de tu usuario.</li>
-        </ul>
-
-        <h3>PARTE 3: ESTRATEGIAS DE ADQUISICIÓN MODERNAS</h3>
-
-        <h4>Capítulo 5: Growth Hacking Aplicado al Tráfico Web</h4>
-        <p>
-          Crecer con presupuestos ajustados no es un milagro, es una metodología de ingeniería. Aquí desmitificamos el concepto de Growth Hacking.
-        </p>
-        <ul>
-          <li><strong>Experimentación como religión:</strong> Aprenderás a testear ideas baratas antes de invertir tiempo y dinero en grandes desarrollos.</li>
-          <li><strong>Adquisición de bajo costo:</strong> Platform riding y alianzas estratégicas para aprovechar la fuerza de otros y crecer juntos.</li>
-          <li><strong>Mecanismos de viralidad real:</strong> Cómo diseñar contenido que la gente comparta de forma natural porque les hace quedar bien o les aporta un beneficio tangible.</li>
-        </ul>
-
-        <h4>Capítulo 6: Plataformas Emergentes y Micro-Nichos</h4>
-        <p>
-          Competir en los grandes mercados es una batalla de desgaste. Los micro-nichos son océanos azules de rentabilidad y fidelidad.
-        </p>
-        <ul>
-          <li><strong>El poder del enfoque:</strong> Por qué 1,000 seguidores leales valen más que un millón de curiosos que no saben quién eres.</li>
-          <li><strong>Oportunidades en plataformas nuevas:</strong> Desde Discord y Threads hasta comunidades verticales especializadas.</li>
-          <li><strong>Checklist de validación:</strong> 5 criterios para saber si una plataforma emergente merece tu tiempo o es solo una moda pasajera.</li>
-        </ul>
-
-        <h3>PARTE 4: AUTOMATIZACIÓN Y ESCALABILIDAD</h3>
-
-        <h4>Capítulo 7: Automatización Inteligente de Tráfico</h4>
-        <p>
-          Trabajar 80 horas a la semana no es el camino al éxito, es el camino al agotamiento. La automatización es el puente hacia tu libertad operativa.
-        </p>
-        <ul>
-          <li><strong>Tu stack personalizado:</strong> Herramientas para cada etapa y cada presupuesto, desde lo gratuito hasta lo profesional.</li>
-          <li><strong>Distribución automática:</strong> Programación inteligente y reutilización de contenido para que tu presencia digital no dependa de que estés sentado frente a la pantalla.</li>
-        </ul>
-
-        <h4>Capítulo 8: Sistemas de Analítica y Mejora Continua</h4>
-        <p>
-          Lo que no se mide no se puede mejorar. En este capítulo transformamos los datos aburridos en decisiones de negocio brillantes.
-        </p>
-        <ul>
-          <li><strong>Dashboards que sirven para algo:</strong> Olvida los informes de 40 páginas. Crea tableros visuales que te digan qué hacer hoy mismo.</li>
-          <li><strong>Mapas de calor y comportamiento:</strong> Entiende no solo cuántos entran, sino exactamente qué hacen y por qué se van antes de tiempo.</li>
-        </ul>
-
-        <h3>PARTE 5: ESTRATEGIAS AVANZADAS</h3>
-        
-        <h4>Capítulo 9: Tráfico Pagado Efectivo</h4>
-        <p>
-          Invertir dinero en publicidad no debe ser una apuesta al azar. Aquí aprenderás la mentalidad del inversor frente a la del gastador.
-        </p>
-        
-        <h4>Capítulo 10: Construcción de Comunidad</h4>
-        <p>
-          El tráfico más valioso es el que vuelve por su propia cuenta. Aprenderás a transformar una audiencia pasiva en una comunidad vibrante y comprometida.
-        </p>
-
-        <h3>PARTE 6: IMPLEMENTACIÓN Y RESULTADOS</h3>
-
-        <h4>Capítulo 11: Plan de 90 Días Detallado</h4>
-        <p>
-          Este no es un capítulo de "puedes hacer esto". Es un cronograma de "tienes que hacer esto". Dividimos los 90 días en tres bloques críticos de acción masiva e inteligente.
-        </p>
-        <ul>
-          <li><strong>Mes 1: La Fundación Invisible.</strong> Durante los primeros 30 días, nos enfocaremos en lo que nadie ve pero todos necesitan. Realizaremos una auditoría técnica profunda (sin complicaciones), limpiaremos el peso muerto de tu web y estableceremos los KPI (indicadores clave de rendimiento) que realmente importan para tu nicho. Aprenderás a configurar tu sistema de medición para que cada decisión futura se base en la verdad de los datos, no en suposiciones.</li>
-          <li><strong>Mes 2: La Conquista de los Canales.</strong> Con la base sólida, lanzamos nuestra ofensiva. Seleccionaremos los 3 canales secundarios que mejor se adapten a tu voz y empezaremos a distribuir contenido atomizado. Te enseñaré el método de "presencia omnipresente" donde pareces estar en todas partes con solo un par de horas de trabajo a la semana. Empezaremos a ver los primeros picos de tráfico fuera de los buscadores.</li>
-          <li><strong>Mes 3: Optimización y La Máquina de Vuelo.</strong> En el último tercio, analizaremos qué ha funcionado y qué no. Aprenderemos a duplicar la inversión en los canales ganadores y a automatizar las tareas repetitivas para que el sistema empiece a funcionar de forma autónoma. Al final de estos 90 días, tendrás un ecosistema de tráfico que no depende de un solo hilo, sino de una red robusta.</li>
-        </ul>
-
-        <h4>Capítulo 12: Casos de Estudio Reales y Lecciones de la Trinchera</h4>
-        <p>
-          Analizamos ejemplos reales para que veas la teoría aplicada.
-        </p>
-        <ul>
-          <li><strong>El caso de la tienda de nicho 'Artisano':</strong> Cómo pasaron de 500 visitas de Google a 15,000 mensuales integrando Pinterest y una comunidad privada en 60 días.</li>
-          <li><strong>El consultor solitario 'Ramiro':</strong> Cómo usó la atomización de contenido para pasar de ser un desconocido a ser citado por herramientas de IA como experto en su campo, multiplicando sus leads x4.</li>
-          <li><strong>La startup 'SaaS-Global':</strong> Su transición de una dependencia peligrosa de los anuncios de Facebook a un tráfico orgánico y social diversificado que redujo su coste por adquisición en un 60%.</li>
-        </ul>
-      </Section>
-
-      {/* FAQ Section */}
-      <Section className="markdown-body bg-slate-50 rounded-3xl p-12 my-12">
-        <h2 className="text-center italic mb-12">Preguntas Frecuentes: Despejando el Camino</h2>
-        
-        <div className="space-y-12">
-          <div>
-            <h3 className="text-brand-blue text-xl mb-4 italic">¿Realmente necesito saber programar o ser un experto técnico?</h3>
-            <p className="border-l-2 border-brand-accent pl-6 text-slate-600">
-              Absolutamente no. He escrito este libro pensando en el emprendedor que tiene una idea, un mensaje o un producto, pero no tiene por qué tener un máster en ingeniería informática. Las herramientas que recomiendo son intuitivas y la mayoría tienen interfaces visuales. Si sabes usar un procesador de textos y navegar por redes sociales, tienes toda la base técnica necesaria.
-            </p>
+      {/* Chapters Walkthrough */}
+      <section className="py-16 px-6 bg-brand-bg">
+        <div className="max-w-6xl mx-auto">
+          <SectionTag text="EL RECORRIDO" />
+          <SectionHeading 
+            title="Capítulo por Capítulo: Tu Transformación Estratégica" 
+            subtitle="Este no es un libro para 'aprender'. Es un sistema diseñado para que actúes desde la primera página."
+          />
+          
+          <div className="grid md:grid-cols-2 gap-6 mt-12">
+            <ChapterBlock 
+              num={1}
+              title="El Nuevo Panorama del Tráfico Web"
+              description="No puedes aspirar a ganar un juego cuyas reglas no conoces. Este capítulo es la radiografía cruda del momento actual del marketing digital."
+              items={[
+                "La revolución de la IA: El 40% de los menores de 30 años ya usa asistentes como ChatGPT como su primer motor de búsqueda.",
+                "El colapso del alcance orgánico: Entenderás por qué necesitas generar tres veces más atención para lograr los mismos resultados.",
+                "El ascenso del Social Commerce: Plataformas donde el usuario descubre y compra sin salir de la aplicación nativa.",
+                "Los 4 Pilares del Tráfico Sostenible: Experiencia, Valor, Presencia y Comunidad activa para un crecimiento a prueba de futuro."
+              ]}
+            />
+            <ChapterBlock 
+              num={2}
+              title="Psicología del Usuario Moderno"
+              description="Los algoritmos son volátiles, pero la naturaleza humana se mantiene constante. Aprende a pensar como tu usuario, no como un vendedor."
+              items={[
+                "Neurociencia del comportamiento: Diseña estrategias para un ciclo de atención reducido a apenas 8 segundos.",
+                "Estructura del scroll vertical: El 73% de los usuarios nunca llegan a la mitad de tu contenido. Aprende a retenerlos.",
+                "Psicología de la confianza: Cómo generar autoridad en una era de escepticismo masivo y exceso de información.",
+                "Los 6 sesgos cognitivos éticos: Aplicación práctica de la prueba social y la aversión a la pérdida."
+              ]}
+            />
+            <ChapterBlock 
+              num={3}
+              title="Contenido que Convierte en la Era de IA"
+              description="La IA no va a reemplazarte, pero un estratega que sepa dominarla sí lo hará. Este capítulo es el punto de inflexión para tu creatividad."
+              items={[
+                "Marco ACTS: Autenticidad, Contexto, Transparencia y Sustancia frente al contenido genérico de baja calidad.",
+                "SEO Conversacional: Estructuración avanzada para que LLMs como Gemini o Claude te citen como fuente autorizada.",
+                "Atomización 2.0: Una matriz para transformar una sola idea en 12 formatos distintos sin perder la esencia.",
+                "Flujo de trabajo Híbrido: Dónde aporta valor la IA y dónde es absolutamente vital tu toque humano diferencial."
+              ]}
+            />
+            <ChapterBlock 
+              num={4}
+              title="SEO Actual: Más Allá de las Palabras Clave"
+              description="Para aquellos que todavía creen en el potencial del tráfico orgánico, pero saben que el método tradicional ha caducado por completo."
+              items={[
+                "EEAT 2.0: Experiencia, Pericia, Autoridad y Confianza llevadas al extremo demostrable ante los buscadores.",
+                "Topic Clusters vs Keywords: Por qué agrupar por intención de búsqueda multiplica el tráfico x10 frente a frases aisladas.",
+                "SEO Técnico Humano: Optimización de velocidad y Core Web Vitals como un ejercicio de respeto por el usuario.",
+                "Búsqueda Semántica: Cómo los buscadores entienden conceptos complejos y no solo cadenas de texto."
+              ]}
+            />
+            <ChapterBlock 
+              num={5}
+              title="Growth Hacking Aplicado"
+              description="Crecer con poco presupuesto no es una fantasía. Es una metodología de ingeniería aplicada al marketing estratégico."
+              items={[
+                "Adquisición de bajo costo: Técnicas de platform riding y community hijacking explicadas paso a paso.",
+                "Viral Loops: Diseño de contenido que la gente necesite compartir por su utilidad intrínseca y valor social.",
+                "Framework AARRR: Adquisición, Activación, Retención, Recomendación e Ingresos aplicados a cualquier nicho.",
+                "Experimentación como religión: Cómo fallar rápido y barato para encontrar la veta de crecimiento real."
+              ]}
+            />
+            <ChapterBlock 
+              num={6}
+              title="Plataformas Emergentes y Micro-Nichos"
+              description="Competir en mercados masivos es prohibitivo. Aprende a identificar y dominar micro-nichos rentables antes que los demás."
+              items={[
+                "El poder de los micro-nichos: Por qué 1.000 fans verdaderos valen más que un millón de seguidores pasivos.",
+                "Estrategias de entrada temprana: Cómo detectar la próxima plataforma ganadora y posicionarte como referente.",
+                "Comunidades verticales: El paso de lo masivo a lo especializado en entornos como Circle o Discord.",
+                "Monetización de micro-audiencias: Estrategias de alta rentabilidad incluso con bajo volumen de tráfico web."
+              ]}
+            />
+            <ChapterBlock 
+              num={7}
+              title="Automatización Inteligente de Tráfico"
+              description="El tiempo es tu recurso más valioso. Aprende a delegar las tareas repetitivas en sistemas automatizados y asistentes IA."
+              items={[
+                "Stack Tecnológico 2026: Herramientas esenciales desde el nivel de ahorro presupuestario hasta el premium.",
+                "Distribución Automática: Cómo estar presente en 6 redes sociales dedicando solo 2 horas semanales.",
+                "Moderación con IA: Sistemas que gestionan tu comunidad y responden dudas básicas mientras duermes.",
+                "Lead Generation Autónoma: Prospección y scoring de clientes potenciales sin intervención manual directa."
+              ]}
+            />
+            <ChapterBlock 
+              num={8}
+              title="Analítica Avanzada y Mejora Continua"
+              description="Lo que no se mide no se puede mejorar. Aprende a interpretar los datos para tomar decisiones quirúrgicas empresariales."
+              items={[
+                "Tableros Accionables: Cómo construir dashboards que realmente te digan qué acción tomar a continuación.",
+                "Interpretación de Mapas de Calor: Entiende dónde mueren tus conversiones y por qué el usuario abandona.",
+                "Sprints de Experimentación: Ciclos de 14 días para optimizar cada rincón de tu embudo de tráfico.",
+                "Analítica Predictiva: Detecta tendencias de búsqueda antes de que exploten para posicionarte en cabeza."
+              ]}
+            />
+            <ChapterBlock 
+              num={9}
+              title="Inversión en Tráfico Pagado (Ads)"
+              description="No se trata de gastar dinero, sino de invertirlo con precisión científica para escalar lo que ya funciona."
+              items={[
+                "Mentalidad de Inversión: Cálculo de LTV y ROAS para saber cuánto puedes pagar por cada visita cualificada.",
+                "Estrategias de Bidding: CPA vs ROAS objetivo. Cuándo usar cada técnica para no quemar el presupuesto.",
+                "Creativos de Alto Impacto: La fórmula de los 3 segundos para detener el scroll y generar el clic inmediato.",
+                "Audiencias similares (Lookalikes): Cómo usar tus datos para encontrar gemelos de tus mejores clientes."
+              ]}
+            />
+            <ChapterBlock 
+              num={10}
+              title="Construcción de Comunidad"
+              description="El tráfico más rentable es aquel que posees. Las comunidades son el activo más resistente a los cambios algorítmicos."
+              items={[
+                "De Audiencia a Comunidad: Rituales y ceremonias que transforman seguidores silenciosos en embajadores activos.",
+                "Arquitectura de Comunidades: Selección de plataformas y diseño de espacios de interacción valiosa.",
+                "Estrategias de Activación: Cómo mantener el interés a largo plazo sin ser un esclavo del contenido diario.",
+                "Membresías Sostenibles: Modelos de negocio basados en la recurrencia y la exclusividad del acceso."
+              ]}
+            />
+            <ChapterBlock 
+              num={11}
+              title="El Plan Maestro de 90 Días"
+              description="La estrategia sin ejecución es solo una alucinación. Este capítulo es tu cronograma de batalla detallado día por día."
+              items={[
+                "Mes 1: Cimentación. Auditoría profunda, SEO técnico y definición de la propuesta de valor única del proyecto.",
+                "Mes 2: Expansión. Lanzamiento de canales secundarios, creación de contenido pilar y primeras automatizaciones.",
+                "Mes 3: Optimización. Análisis de datos, escalada de presupuesto en Ads y cierre del sistema de retención.",
+                "Listas de Verificación: Tareas semanales críticas para mantener el rumbo sin distracciones ni bloqueos."
+              ]}
+            />
+            <ChapterBlock 
+              num={12}
+              title="Casos de Estudio y Acción Real"
+              description="Aprende de los éxitos y fracasos documentados de otros. Análisis detallado de proyectos reales en marcha."
+              items={[
+                "De 800 a 25.000 visitas: Caso de éxito de un ecommerce de nicho que dominó su mercado en un solo trimestre.",
+                "Estrategia SaaS B2B: Generación de leads cualificados mediante contenido hiper-específico impulsado por IA.",
+                "Patrones comunes del éxito: Los 4 elementos que siempre están presentes cuando un proyecto digital despega.",
+                "Plantillas Listas para Usar: Recursos descargables y estructuras que puedes adaptar a tu proyecto hoy mismo."
+              ]}
+            />
           </div>
 
-          <div>
-            <h3 className="text-brand-blue text-xl mb-4 italic">¿Cuánto tiempo tardaré en ver resultados reales?</h3>
-            <p className="border-l-2 border-brand-accent pl-6 text-slate-600">
-              El tráfico web no es magia instantánea, pero tampoco tiene por qué ser una agonía de años. Siguiendo el plan de 90 días, la mayoría de los lectores empiezan a notar cambios significativos en la calidad y cantidad de su tráfico a partir de la semana 4 o 5. El objetivo es construir algo sostenible, no un pico de un día que desaparezca mañana.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-brand-blue text-xl mb-4 italic">¿Funcionará esto si mi nicho es muy específico o "aburrido"?</h3>
-            <p className="border-l-2 border-brand-accent pl-6 text-slate-600">
-              De hecho, cuanto más específico o "aburrido" sea tu nicho, mejor funcionan estas estrategias. En los mercados masivos hay demasiado ruido. En los micro-nichos (como la venta de suministros industriales o asesoría legal muy técnica), las personas están hambrientas de contenido de valor y autoridad. Te enseñaré a ser el pez grande en ese océano específico.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-brand-blue text-xl mb-4 italic">¿Tengo que estar en todas las redes sociales? No tengo tiempo para eso.</h3>
-            <p className="border-l-2 border-brand-accent pl-6 text-slate-600">
-              Ese es uno de los mayores errores. El libro te enseña precisamente a NO estar en todas partes. Aprenderás a elegir los 2 o 3 canales donde realmente está tu audiencia y a ignorar el resto. Además, con el sistema de atomización de contenido que te enseño en el Capítulo 3, podrás estar presente en varios sitios con el esfuerzo que antes dedicabas a uno solo.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-brand-blue text-xl mb-4 italic">¿Qué pasa si Google lanza otra actualización mañana mismo?</h3>
-            <p className="border-l-2 border-brand-accent pl-6 text-slate-600">
-              Esa es la belleza de este sistema. Si Google cambia sus reglas hoy, tú podrás dormir tranquilo. Al tener fuentes de tráfico diversificadas (comunidad propia, newsletters, plataformas emergentes, etc.), una caída en un canal es solo un inconveniente menor, no una sentencia de muerte para tu negocio. Este libro es tu seguro de vida digital.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-brand-blue text-xl mb-4 italic">¿El libro se actualiza con los cambios de la IA?</h3>
-            <p className="border-l-2 border-brand-accent pl-6 text-slate-600">
-              He enfocado el libro en estrategias fundamentales que no dependen de que una herramienta concreta cambie un botón de sitio. Nos centramos en la psicología, la estructura y los sistemas. Las herramientas de IA que mencionamos son las líderes del mercado (ChatGPT, Claude), pero el método funciona con cualquier modelo que surja en el futuro.
-            </p>
+          <div className="mt-16 flex justify-center">
+            <CTAButton text="DESBLOQUEAR EL SISTEMA COMPLETO" />
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* Author Section */}
-      <section className="py-24 bg-brand-blue text-slate-800 overflow-hidden relative">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-          {/* Subtle background pattern could go here */}
-        </div>
-        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <h2 className="editorial-heading text-4xl mb-12 italic text-slate-900">No soy un gurú. Soy un aprendiz que comparte.</h2>
-          <div className="w-32 h-32 bg-slate-100 rounded-full mx-auto mb-8 border-4 border-brand-red flex items-center justify-center text-brand-blue text-4xl font-serif font-bold">
-            FG
+      <section className="py-16 px-6 border-t border-slate-100">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
+          <div className="w-full md:w-1/2 order-2 md:order-1">
+             <SectionTag text="EL AUTOR" />
+             <h2 className="editorial-heading text-4xl mb-4">No Soy Un Gurú. <br />Soy Un Aprendiz Que Comparte.</h2>
+             <div className="prose-editorial">
+                <p>
+                  Me llamo <strong>Francisco González</strong>. No tengo un despacho de cristal en una torre de Nueva York ni aparezco en portadas de revistas de finanzas. Soy alguien como tú: profundamente curioso y comprometido con entender los engranajes de la red.
+                </p>
+                <p>
+                  He leído cientos de volúmenes, he experimentado con decenas de herramientas y, lo más importante, he cometido cientos de errores de los que he aprendido más que de cualquier éxito efímero.
+                </p>
+                <p>
+                  Este libro no es una recopilación de teorías académicas. Es la síntesis refinada de lo que realmente genera atención, retención y crecimiento en el ecosistema digital actual. Cada estrategia aquí presente ha sido validada en la práctica real.
+                </p>
+             </div>
           </div>
-          <p className="text-2xl font-serif mb-8 text-brand-red font-bold italic">Mi nombre es Francisco González.</p>
-          <div className="space-y-6 text-lg text-slate-800 max-w-2xl mx-auto leading-relaxed">
-            <p>
-              Y no, no tengo un despacho en la planta 50 de una torre de cristal ni aparezco en la lista Forbes. No soy un conferencista internacional que viaja en jet privado.
-            </p>
-            <p>
-              Soy alguien como tú: apasionado, curioso y, sobre todo, un aprendiz constante del mundo digital.
-            </p>
-            <p>
-              Todo comenzó por accidente, frente a una pantalla brillante y una cuenta de visitas que no se movía de cero. Pasé noches enteras frustrado, sintiendo que había un secreto que todos conocían menos yo. Pero en lugar de rendirme, decidí investigar, probar y equivocarme.
-            </p>
-            <p>
-              He leído cientos de manuales, he probado herramientas que prometían el cielo y se quedaban en nada, y he cometido errores dolorosos (y caros). Pero cada uno de esos errores fue una lección que hoy está condensada en este libro para que tú no tengas que pagarlos.
-            </p>
-            <p>
-              Este libro no es teoría académica. Es el resultado de la práctica real. Es la síntesis de lo que funciona hoy, en las trincheras del marketing digital, no lo que suena bien en las aulas de universidad.
-            </p>
+          <div className="w-full md:w-1/2 order-1 md:order-2 flex justify-center">
+             <motion.div 
+               className="relative"
+               whileHover={{ scale: 1.05, rotate: 2 }}
+               transition={{ type: "spring", stiffness: 300 }}
+             >
+                <div className="absolute inset-0 bg-brand-accent/20 rounded-full blur-2xl -z-10" />
+                <img 
+                  src="https://i.ibb.co/XkxVB4VJ/6-300x300.jpg" 
+                  alt="Francisco González" 
+                  className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white shadow-xl"
+                  referrerPolicy="no-referrer"
+                />
+             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* For Whom It Is */}
-      <Section className="markdown-body">
-        <h2 className="text-center">¿Es esto para ti?</h2>
-        <p className="text-xl text-center mb-12">Seamos honestos. No quiero que pierdas tu tiempo ni tu dinero si este no es el recurso adecuado para tu momento actual.</p>
-        
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="p-8 bg-slate-50 rounded-2xl border-t-4 border-brand-blue">
-            <h3 className="text-brand-blue">Esto es para ti si...</h3>
-            <ul className="list-none space-y-4 text-sm md:text-base">
-              <li>Tienes un proyecto digital y sientes que mereces más visibilidad de la que tienes hoy.</li>
-              <li>Estás empezando y te sientes abrumado por el ruido y la información contradictoria.</li>
-              <li>Ya has probado "hacer SEO" o redes sociales sin ver resultados tangibles en tu cuenta bancaria.</li>
-              <li>Quieres dejar de ser un esclavo de los caprichos de Google o Mark Zuckerberg.</li>
-              <li>Entiendes que el mundo digital ha cambiado y necesitas un mapa actualizado, no un recuerdo del pasado.</li>
-            </ul>
-          </div>
-          <div className="p-8 bg-slate-50 rounded-2xl border-t-4 border-brand-red opacity-80">
-            <h3 className="text-brand-red">Esto NO es para ti si...</h3>
-            <ul className="list-none space-y-4 text-sm md:text-base">
-              <li>Buscas una "fórmula mágica" para hacerte rico mientras duermes sin mover un dedo.</li>
-              <li>No estás dispuesto a dedicar unas horas a la semana a implementar lo aprendido.</li>
-              <li>Crees que el marketing se trata de engañar personas en lugar de ayudarles a resolver problemas.</li>
-              <li>Prefieres seguir confiando en tu intuición en lugar de mirar los datos reales de tu negocio.</li>
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* Guarantee */}
-      <section className="py-24 bg-slate-50 border-y border-slate-200">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-block p-1 bg-brand-red mb-8">
-            <div className="border border-white py-2 px-6 text-white font-bold tracking-widest uppercase text-xs">
-              Garantía de Satisfacción Total
+      {/* Who is this for? */}
+      <section className="py-16 px-6 bg-brand-paper">
+        <div className="max-w-5xl mx-auto">
+          <SectionTag text="AUDIENCIA" centered />
+          <SectionHeading title="¿Es Este Libro Para Ti?" centered />
+          
+          <div className="grid md:grid-cols-2 gap-4 mt-8">
+            <div className="p-5 bg-white border border-slate-100 shadow-sm relative">
+               <div className="absolute top-0 left-0 w-1 h-full bg-brand-accent" />
+               <h3 className="font-bold text-xl mb-4 text-brand-primary italic">Esto es para ti si...</h3>
+               <ul className="space-y-2">
+                  {[
+                    "Tienes un proyecto digital (blog, tienda, podcast) y necesitas visitas de alta calidad.",
+                    "Sientes saturación por la información contradictoria que abunda en la red.",
+                    "Quieres diversificar tus fuentes para no depender nunca más de un solo canal.",
+                    "Entiendes que el marketing ha cambiado y necesitas una actualización profunda."
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start text-slate-600">
+                      <Check className="w-5 h-5 text-brand-accent mr-3 shrink-0 mt-0.5" />
+                      <span className="text-sm md:text-base font-light">{item}</span>
+                    </li>
+                  ))}
+               </ul>
+            </div>
+            <div className="p-5 bg-slate-50 border border-slate-200 shadow-sm relative opacity-80">
+               <div className="absolute top-0 left-0 w-1 h-full bg-slate-400" />
+               <h3 className="font-bold text-xl mb-4 text-slate-500 italic">Esto NO es para ti si...</h3>
+               <ul className="space-y-2">
+                  {[
+                    "Buscas una 'fórmula mágica' para el crecimiento instantáneo sin esfuerzo.",
+                    "No estás dispuesto a dedicar tiempo real a la implementación del plan.",
+                    "Crees que el marketing se trata de 'engañar' algoritmos en lugar de servir audiencias.",
+                    "Prefieres la intuición incierta al análisis riguroso de los datos."
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start text-slate-500">
+                      <Check className="w-5 h-5 text-slate-400 mr-3 shrink-0 mt-0.5" />
+                      <span className="text-sm md:text-base font-light">{item}</span>
+                    </li>
+                  ))}
+               </ul>
             </div>
           </div>
-          <h2 className="editorial-heading text-4xl md:text-5xl mb-8 text-brand-blue">30 Días para Probarlo. Sin Riesgo. Sin Preguntas.</h2>
-          <div className="max-w-2xl mx-auto text-lg leading-relaxed text-slate-700 space-y-6">
+
+          <div className="mt-16 flex justify-center">
+            <CTAButton text="UNIRME A LOS QUE YA ESTÁN CRECIENDO" />
+          </div>
+        </div>
+      </section>
+
+      {/* Warranty */}
+      <section className="py-16 px-6 bg-brand-primary text-white text-center">
+        <div className="max-w-3xl mx-auto space-y-6">
+          <ShieldCheck className="w-16 h-16 text-brand-accent mx-auto mb-4" />
+          <h2 className="editorial-heading !text-white text-5xl md:text-7xl italic leading-tight">30 Días de Garantía Absoluta. <br />Sin Riesgo. Sin Excusas.</h2>
+          
+          <div className="text-xl text-slate-300 font-light leading-relaxed space-y-4">
             <p>
-              Comprendo que el escepticismo es natural hoy en día. Hay demasiadas promesas vacías en internet. Por eso, quiero que la decisión de hoy sea la más fácil de tu semana.
-            </p>
-            <p className="font-bold text-xl text-brand-blue italic">
-              Compra el libro. Léelo. Empieza a aplicar el plan de 90 días.
+              Sé perfectamente lo que estás pensando: "¿Y si este manual no responde a mis necesidades reales? ¿Y si ya conozco la mayor parte de lo que aquí se expone?"
             </p>
             <p>
-              Si después de 30 días sientes que no te ha aportado el valor que esperabas, si crees que el contenido es básico o si simplemente el color de la portada no te gusta... te devuelvo hasta el último centavo.
+               Tu duda es legítima. Por eso quiero que la decisión hoy sea la más fácil de tu trimestre.
+            </p>
+            <p className="bg-white/10 p-4 text-white italic border-l-2 border-brand-accent">
+              "Si tras leerlo y aplicar el plan durante 30 días sientes que no te ha aportado un valor que multiplique tu inversión, te devuelvo el 100% de tu dinero. Sin formularios eternos. Sin preguntas incómodas."
             </p>
             <p>
-              Sin condiciones. Sin procesos farragosos. Un solo email y tu dinero vuelve a tu cuenta. El riesgo es 100% mío, porque confío plenamente en el valor de lo que he escrito.
+              El riesgo financiero de esta operación reside exclusivamente en mis hombros.
             </p>
           </div>
         </div>
       </section>
 
       {/* Final Offer */}
-      <section className="py-32 bg-brand-blue text-slate-900 text-center px-6">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="editorial-heading text-5xl md:text-6xl mb-6">Inversión: $9,99</h2>
-          <div className="w-16 h-1 bg-brand-red mx-auto mb-12"></div>
-          
-          <div className="space-y-6 text-xl mb-16 font-light leading-relaxed text-slate-800">
-            <p>¿Qué representan hoy $9,99?</p>
-            <p>Es menos de lo que cuesta una pizza que habrás olvidado mañana. Menos que dos cafés de especialidad. Menos que una hora de consultoría con cualquier profesional junior.</p>
-            <p className="font-serif italic text-2xl text-brand-red font-bold">
-              A cambio, recibes un plan estructurado para los próximos meses de tu vida profesional.
-            </p>
-            <p>Evita meses de frustración y empieza a caminar por terreno firme hoy mismo.</p>
-          </div>
+      <section id="oferta" className="py-24 px-6 bg-brand-bg relative overflow-hidden">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white border-4 border-brand-primary p-8 md:p-16 text-center shadow-2xl relative">
+            {/* Corner Accent */}
+            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-accent text-white flex items-center justify-center translate-x-1/2 -translate-y-1/2 rotate-45 shadow-lg">
+               <Star className="w-8 h-8 -rotate-45" />
+            </div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center justify-center px-12 py-6 font-bold text-white transition-all duration-200 bg-brand-red font-sans rounded-full text-2xl shadow-2xl hover:bg-red-700 mb-8"
-          >
-            SÍ, QUIERO EL LIBRO AHORA
-          </motion.button>
-          
-          <p className="text-sm opacity-60 uppercase tracking-widest mt-4">
-            Formato: PDF Digital Compatible con todos los dispositivos. Acceso Instantáneo.
-          </p>
-          
-          <div className="mt-12 flex flex-wrap justify-center gap-8 opacity-40 grayscale text-sm">
-            <span>PAYPAL</span>
-            <span>VISA</span>
-            <span>MASTERCARD</span>
-            <span>AMERICAN EXPRESS</span>
+            <SectionTag text="OFERTA FINAL" centered />
+            <h2 className="editorial-heading text-5xl md:text-8xl mb-4 leading-none">Inversión: $9,99</h2>
+            <h3 className="text-2xl md:text-4xl font-serif italic text-brand-secondary mb-12 leading-tight">¿Qué representan hoy estos $9,99?</h3>
+            
+            <div className="max-w-2xl mx-auto space-y-8 text-xl md:text-2xl text-slate-600 font-light leading-relaxed mb-12">
+              <p>
+                Menos de lo que invertirías en una cena que habrás olvidado la próxima semana. Menos de lo que cuestan dos cafés en cualquier establecimiento de paso.
+              </p>
+              
+              <p className="text-brand-primary font-bold text-2xl md:text-3xl leading-tight">
+                Es el mapa detallado para que cada hora que inviertas en tu proyecto a partir de hoy tenga un retorno real.
+              </p>
+
+              <p className="italic font-medium">
+                ¿Cuánto valor tiene para ti contar con un sistema predecible?
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center space-y-8">
+              <CTAButton isFinal />
+              
+              <div className="flex flex-wrap justify-center items-center gap-6 opacity-40">
+                <span className="text-sm font-black tracking-[.2em] italic">VISA</span>
+                <span className="text-sm font-black tracking-[.2em] italic">MASTERCARD</span>
+                <span className="text-sm font-black tracking-[.2em] italic">PAYPAL</span>
+                <span className="text-sm font-black tracking-[.2em] italic">STRIPE</span>
+              </div>
+
+              <div className="flex items-center justify-center gap-2 text-slate-400">
+                <ShieldCheck className="w-5 h-5 text-brand-accent" />
+                <span className="text-xs font-bold tracking-[0.2em] uppercase">
+                  Formato Digital PDF (Acceso Instantáneo tras el pago)
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Final Post-Scriptum Expansion for Word Count */}
-      <Section className="markdown-body text-slate-600 bg-white">
-        <h2 className="text-3xl editorial-heading mb-8">Reflexión Final: ¿Por qué ahora y no después?</h2>
-        <p>
-          Si has llegado hasta este punto de la página, es porque algo dentro de ti sabe que el camino que llevas recorriendo necesita un ajuste de rumbo. El tráfico de tu proyecto no es solo una estadística de Google Analytics; es el pulso de tu mensaje, la oportunidad de que alguien descubra lo que haces y, en última instancia, el motor de tu libertad financiera.
-        </p>
-        <p>
-          Muchos emprendedores pasan años "esperando el momento perfecto" para profesionalizar su estrategia. Esperan a tener más contenido, a tener mejores diseños, a que el mercado esté más estable. Permíteme decirte algo: el mercado nunca estará estable. La tecnología va a seguir acelerando.
-        </p>
-        <p>
-          Google no va a simplificar sus reglas para ayudarte. La Inteligencia Artificial no va a dejar de inundar la red de contenido mediocre. Al contrario, el ruido solo va a aumentar. Y en medio de ese rugido constante, solo aquellos que tengan un sistema sólido y diversificado lograrán ser escuchados.
-        </p>
-        <p>
-          Imagina por un momento cómo se sentirá despertar dentro de 90 días y ver que tu tráfico ya no depende de una sola fuente. Imagina la paz mental que da saber que, si una red social decide cambiar su algoritmo mañana, tu negocio no va a colapsar porque tienes otros cinco canales enviándote visitantes cualificados.
-        </p>
-        <p>
-          Eso no es un sueño inalcanzable. Es el resultado de aplicar una metodología probada. Es el resultado de dejar de improvisar y empezar a ejecutar un plan.
-        </p>
-        <p>
-          Tienes dos opciones hoy. Puedes cerrar esta página, seguir haciendo lo mismo y, muy probablemente, obtener los mismos resultados que hasta ahora. O puedes invertir menos de diez dólares en un manual que puede ahorrarte cientos de horas de trabajo estéril.
-        </p>
-        <p className="font-serif italic text-xl">
-          El único día que no es tarde para empezar es hoy.
-        </p>
-        <p className="mt-8 font-bold">Francisco González</p>
-        <p className="text-sm italic">Autor y apasionado del crecimiento digital estratégico.</p>
-        
-        <div className="mt-24 pt-12 border-t border-slate-100 text-center text-xs text-slate-400">
-          <p>&copy; 2026 Ideas Y Consejos De Tráfico Web. Todos los derechos reservados.</p>
-          <p className="mt-2">Ninguna parte de este libro garantiza resultados específicos. El éxito depende de tu implementación, esfuerzo y el mercado particular de tu nicho.</p>
+      {/* FAQ Added for Content Depth and User Trust */}
+      <section className="py-16 px-6 border-t border-slate-100 bg-brand-paper">
+        <div className="max-w-4xl mx-auto">
+          <SectionTag text="PREGUNTAS FRECUENTES" />
+          <div className="grid gap-6 mt-8">
+            <FAQItem 
+              q="¿Necesito ser un experto tecnológico para aplicar estas lecciones?"
+              a="En absoluto. El manual ha sido redactado con una claridad pedagógica extrema. Si sabes navegar por la red y usar herramientas básicas de oficina, tienes toda la capacidad necesaria para ejecutar el plan de 90 días."
+            />
+            <FAQItem 
+              q="¿Cuánto tiempo diario debo dedicarle al plan?"
+              a="La estructura es flexible. Recomendamos una dedicación mínima de entre 5 y 7 horas semanales para ver resultados tangibles dentro del primer trimestre de aplicación."
+            />
+            <FAQItem 
+              q="¿Qué ocurre si cambio de nicho de mercado a mitad del proceso?"
+              a="Los principios de este sistema son transversales. Se basan en psicología del consumo y estructuras de red. Funcionan tanto para una tienda de artesanía como para un servicio de consultoría legal avanzada."
+            />
+          </div>
         </div>
-      </Section>
+      </section>
 
-      {readingTime > 0 && (
-        <div className="fixed bottom-4 right-4 bg-white/80 backdrop-blur-sm border border-slate-200 px-4 py-2 rounded-full text-xs text-slate-500 shadow-sm md:block hidden">
-          Tiempo estimado de lectura: {readingTime} minutos
+      {/* P.D. Section */}
+      <section className="py-16 px-6 bg-white border-t border-slate-100">
+        <div className="max-w-3xl mx-auto prose-editorial">
+          <SectionTag text="EL ÚLTIMO EMPUJÓN" />
+          <h2 className="italic text-brand-primary text-2xl md:text-4xl mb-4">P.D.: El momento de actuar es hoy.</h2>
+          <p>
+            Si has leído hasta este punto, es porque el crecimiento de tu proyecto te importa de forma honesta. Eres de los que buscan soluciones estructurales, no parches efímeros. Entiendes que el conocimiento sin acción es simplemente entretenimiento refinado.
+          </p>
+          <p>
+            Los algoritmos de búsqueda no se volverán más sencillos. La competencia no va a disminuir. La Inteligencia Artificial no va a desaparecer de nuestro ecosistema. Sin embargo, tú puedes aprender a navegar este nuevo orden digital sin necesidad de convertirte en un experto técnico.
+          </p>
+          <p className="font-bold italic text-brand-primary">
+            Haz clic ahora. Obtén tu ejemplar. Inicia tu plan. Nos vemos al otro lado de la barrera del tráfico.
+          </p>
+          <p className="mt-8 text-brand-accent font-serif text-2xl italic leading-none">Francisco González</p>
         </div>
-      )}
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 bg-white border-t border-slate-100 text-center">
+        <div className="max-w-3xl mx-auto px-6 flex flex-col items-center gap-6">
+          <span className="text-xs text-slate-400 font-bold tracking-[0.3em] uppercase underline decoration-brand-accent/50 underline-offset-4">Ideas Y Consejos De Tráfico Web</span>
+          <p className="text-xs text-slate-400 uppercase tracking-widest leading-loose">
+            &copy; 2026 Todos los derechos reservados.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
+
+const SectionTag = ({ text, centered = false, light = false }: { text: string; centered?: boolean; light?: boolean }) => (
+  <div className={`mb-3 ${centered ? "text-center" : ""}`}>
+    <span className={`text-xs font-bold tracking-[0.4em] uppercase ${light ? "text-brand-accent" : "text-brand-secondary"}`}>[{text}]</span>
+  </div>
+);
+
+const SectionHeading = ({ title, subtitle, centered = false }: { title: string; subtitle?: string; centered?: boolean }) => (
+  <div className={`mb-3 ${centered ? "text-center mx-auto" : ""}`}>
+    <h2 className="editorial-heading text-4xl md:text-7xl mb-2">{title}</h2>
+    {subtitle && <p className={`text-xl text-slate-500 font-light max-w-3xl leading-relaxed ${centered ? "mx-auto" : ""}`}>{subtitle}</p>}
+  </div>
+);
+
+const ChapterBlock = ({ num, title, description, items }: { num: number; title: string; description: string; items: string[] }) => (
+  <div className="p-8 bg-white border border-slate-200 shadow-2xl shadow-slate-200/40 relative group transition-all duration-500 hover:-translate-y-2">
+    <div className="absolute top-0 left-0 w-full h-2 bg-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <span className="block font-serif text-6xl text-brand-secondary/10 mb-2 leading-none">0{num}</span>
+    <h3 className="editorial-heading text-3xl md:text-4xl mb-2 leading-tight">{title}</h3>
+    <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-3 font-medium">{description}</p>
+    <ul className="space-y-2">
+      {items.map((item, i) => (
+        <li key={i} className="flex items-start text-base md:text-lg text-slate-700 font-semibold leading-relaxed">
+          <span className="text-brand-accent mr-2">»</span>
+          {item}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const FAQItem = ({ q, a }: { q: string; a: string }) => (
+  <div className="border-b border-slate-200 pb-8 transition-all group">
+    <h4 className="editorial-heading text-2xl md:text-3xl mb-3 group-hover:text-brand-secondary transition-colors duration-300">{q}</h4>
+    <p className="text-slate-700 text-xl md:text-2xl font-normal leading-relaxed">{a}</p>
+  </div>
+);
